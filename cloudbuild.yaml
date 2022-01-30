@@ -1,0 +1,26 @@
+steps:
+  # Install dependencies 
+  - name: python
+    entrypoint: pip
+    args: ['install', '-r', 'requirements.txt', '--user']
+  
+  # Linting with flake8
+#  - name: python
+#    entrypoint: python
+#    args: ["-m", "flake8"]
+
+  # Run unit tests
+  - name: python
+    entrypoint: python
+    args: ['-m', 'pytest', '--ignore=Lib']
+
+  # [START cloudbuild_python_image_yaml]
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/myimage:${SHORT_SHA}', '.']
+
+  # [START cloudbuild_python_push_yaml]
+  # Docker push to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',  'us-central1-docker.pkg.dev/${PROJECT_ID}/${_REPO_NAME}/myimage:${SHORT_SHA}']
+  # [END cloudbuild_python_push_yaml]
