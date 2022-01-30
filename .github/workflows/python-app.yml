@@ -37,7 +37,7 @@ jobs:
     - name: Lint with flake8
       run: |
         # start linting with flake8
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude .git,__pycache__,docs/source/conf.py,old,build,dist,Lib
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude .git,__pycache__,docs/source/conf.py,old,build,dist,Lib,lib
         
     - name: Test with pytest
       run: |
