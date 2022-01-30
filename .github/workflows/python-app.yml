@@ -29,7 +29,7 @@ jobs:
         echo "VIRTUAL ENV:" $VIRTUAL_ENV
         
     - name: Install dependencies
-      working-directory: $VIRTUAL_ENV
+      working-directory: env
       run: |
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
